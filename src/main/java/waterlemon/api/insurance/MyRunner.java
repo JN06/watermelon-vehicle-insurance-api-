@@ -35,6 +35,8 @@ public class MyRunner implements CommandLineRunner {
     	vehicleController.createVehicle( new Vehicle( 1,4796346L, "BMW",  "M3", "4.0", "2016", 450.75));
 	
     }*/
-	public void run(String...args) throws Exception {}
+	public void run(String...args) throws Exception {
+		
+	}
 }
 
