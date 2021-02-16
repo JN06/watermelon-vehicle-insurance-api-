@@ -21,6 +21,7 @@ import waterlemon.api.insurance.repository.Vehicle_Repository;
 
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin(origins = "https://wattermelon-website.herokuapp.com")
 public class VehicleController {
  
   @Autowired

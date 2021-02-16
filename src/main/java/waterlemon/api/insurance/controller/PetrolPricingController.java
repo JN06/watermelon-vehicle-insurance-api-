@@ -16,21 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import waterlemon.api.insurance.exceptions.ResourceNotFoundException;
 import waterlemon.api.insurance.models.PetrolPricing;
+import waterlemon.api.insurance.models.PetrolPricingString;
 import waterlemon.api.insurance.models.Vehicle;
 import waterlemon.api.insurance.repository.PetrolPricing_Repository;
 
 
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin(origins = "https://wattermelon-website.herokuapp.com")
 public class PetrolPricingController {
 
-	
 	  @Autowired
 	  private PetrolPricing_Repository petrolPricing_repository;
 	  
 	  @GetMapping("/ppricing/get_all")
 	  public List<PetrolPricing> getAllQoutes(){
 		  return petrolPricing_repository.findAll();
+	  }
+	  @GetMapping("/ppricing/get_all_as_string")
+	  public List<PetrolPricingString> getAllQoutesString(){
+		  List<PetrolPricingString> list = new ArrayList();
+		  List<PetrolPricing> cur = getAllQoutes();
+				  for(PetrolPricing e : cur) {
+					  PetrolPricingString tempObj = new PetrolPricingString();
+					  tempObj.setId(e.getId());
+					  tempObj.setCar_value_range(e.getCar_value_range().toString());
+					  tempObj.setAvg_dealer_2yr_30000kms(e.getAvg_dealer_2yr_30000kms().toString());
+					  tempObj.setAvg_dealer_2yr_40000kms(e.getAvg_dealer_2yr_40000kms().toString());
+					  tempObj.setAvg_dealer_2yr_45000kms(e.getAvg_dealer_2yr_45000kms().toString());
+					  tempObj.setAvg_dealer_2yr_60000kms(e.getAvg_dealer_2yr_60000kms().toString());
+					  tempObj.setAvg_rmi_2yr_30000kms(e.getAvg_rmi_2yr_30000kms().toString());
+					  tempObj.setAvg_rmi_2yr_40000kms(e.getAvg_rmi_2yr_40000kms().toString());
+					  tempObj.setAvg_rmi_2yr_45000kms(e.getAvg_rmi_2yr_45000kms().toString());
+					  tempObj.setAvg_rmi_2yr_60000kms(e.getAvg_rmi_2yr_60000kms().toString());
+					  list.add(tempObj);
+				  }
+		  return list;
 	  }
 	  
 	  @CrossOrigin(origins = "http://localhost:4200")
